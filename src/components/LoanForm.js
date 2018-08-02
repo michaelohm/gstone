@@ -7,13 +7,15 @@ class LoanField extends Component {
   render() {
     return (
       <div className="form-group">
-        <label>{this.props.label}</label>
-        <input
-          className="form-control"
-          {...this.props.input}
-          placeholder={this.props.placeholder}
-          // required={this.props.required}
-        />
+        <label className="col-sm-4">{this.props.label}</label>
+        <div className="col-sm-8">
+          <input
+            className="form-control"
+            {...this.props.input}
+            placeholder={this.props.placeholder}
+            // required={this.props.required}
+          />
+        </div>
       </div>
     );
   }
@@ -32,7 +34,7 @@ class LoanForm extends Component {
             label="Street"
             type="text"
             name="street"
-            placeholder="1 Cool Street"
+            placeholder="1 Grey Street"
             component={LoanField}
             required
           />
