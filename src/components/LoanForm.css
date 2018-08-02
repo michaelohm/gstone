@@ -1,0 +1,13 @@
+.loan-form-wrapper {
+  border: 1px solid #ccc;
+  margin: 20px;
+  padding: 10px;
+}
+
+.loan-form-submit {
+  margin-top: 20px;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}

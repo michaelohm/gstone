@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import "./LoanForm.css";
 
 class LoanField extends Component {
   render() {
@@ -13,7 +14,7 @@ class LoanField extends Component {
             className="form-control"
             {...this.props.input}
             placeholder={this.props.placeholder}
-            // required={this.props.required}
+            required={this.props.required}
           />
         </div>
       </div>
@@ -24,7 +25,8 @@ class LoanField extends Component {
 class LoanForm extends Component {
   render() {
     return (
-      <div>
+      <div className="loan-form-wrapper">
+        <h4 className="text-center">Get your loan terms today!</h4>
         <form
           onSubmit={this.props.handleSubmit(values => {
             this.props.fetchTerms({ values });
@@ -52,6 +54,7 @@ class LoanForm extends Component {
             name="state"
             placeholder="NY"
             component={LoanField}
+            required
           />
           <Field
             label="County"
@@ -59,6 +62,7 @@ class LoanForm extends Component {
             name="county"
             placeholder="New York County"
             component={LoanField}
+            required
           />
           <Field
             label="Zip"
@@ -66,22 +70,31 @@ class LoanForm extends Component {
             name="zip"
             placeholder="12345"
             component={LoanField}
+            required
           />
           <Field
             label="Income"
             type="text"
             name="income"
             component={LoanField}
-          />{" "}
+            required
+          />
           <Field
             label="Expenses"
             type="text"
             name="expenses"
             component={LoanField}
-          />{" "}
-          <Field label="NOI" type="text" name="noi" component={LoanField} />
-          <div className="text-right">
-            <button className="btn btn-success" type="submit">
+            required
+          />
+          <Field
+            label="NOI"
+            type="text"
+            name="noi"
+            component={LoanField}
+            required
+          />
+          <div className="text-center">
+            <button className="btn btn-success loan-form-submit" type="submit">
               Submit
             </button>
           </div>

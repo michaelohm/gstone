@@ -3,6 +3,7 @@ import TermDetail from "./TermDetail";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import LoanForm from "./LoanForm";
+import "./LoanInfo.css";
 
 class LoanInfo extends Component {
   constructor() {
@@ -12,7 +13,8 @@ class LoanInfo extends Component {
     };
   }
   handleViewMore() {
-    this.setState({ showCount: (this.state.showCount += 3) });
+    let showCount = this.state.showCount + 3;
+    this.setState({ showCount });
   }
   render() {
     let { terms } = this.props;
@@ -20,24 +22,28 @@ class LoanInfo extends Component {
       console.log("showCount", terms.slice(0, 3));
     }
     return (
-      <div>
+      <div className="loan-info-container">
         <div className="row">
-          <div className="col-sm-6">asdf</div>
-          <div className="col-sm-6">
+          <div className="col-sm-6 col-sm-offset-3">
             <LoanForm />
           </div>
         </div>
         <hr />
         <div className="row">
           {terms && (
-            <div className="text-center">
+            <div>
               {terms.slice(0, this.state.showCount).map((term, index) => {
                 return <TermDetail key={index} term={term} />;
               })}
               {this.state.showCount < terms.length && (
-                <button className="btn" onClick={() => this.handleViewMore()}>
-                  Show More Terms
-                </button>
+                <div className="text-center">
+                  <button
+                    className="btn btn-info"
+                    onClick={() => this.handleViewMore()}
+                  >
+                    Show More Terms
+                  </button>
+                </div>
               )}
             </div>
           )}
