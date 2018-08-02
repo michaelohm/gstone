@@ -1,46 +1,33 @@
 import React, { Component } from "react";
-import axios from "axios";
 import TermDetail from "./TermDetail";
+import { reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import LoanForm from "./LoanForm";
 
 class LoanInfo extends Component {
-  constructor() {
-    super();
-    this.state = {
-      data: {
-        income: 300023,
-        expenses: 22123,
-        rate: 3.22,
-        noi: 20000,
-        address: {
-          street: "1 Bacon Street",
-          city: "Brooklyn",
-          state: "NY",
-          county: "Kings County",
-          zip: "11216"
-        }
-      },
-      terms: []
-    };
-  }
-  async componentDidMount() {
-    const res = await axios.post(
-      "https://script.google.com/macros/s/AKfycbwPGz6uQQS9IW33ASPYlcWaEtRMD8eDAK1ONg7lT2dREXpaSUYh/exec",
-      JSON.stringify(this.state.data)
-    );
-    this.setState({ terms: res.data.terms });
-  }
   render() {
-    let { terms } = this.state;
+    let { terms } = this.props;
     return (
-      <div className="row">
-        {terms.length > 0
-          ? terms.map((term, index) => {
+      <div>
+        <div>
+          <LoanForm />
+        </div>
+        <hr />
+        <div className="row">
+          {terms &&
+            terms.map((term, index) => {
               return <TermDetail key={index} term={term} />;
-            })
-          : "loading"}
+            })}
+        </div>
       </div>
     );
   }
 }
 
-export default LoanInfo;
+function mapStateToProps({ terms }) {
+  return { terms };
+}
+
+LoanInfo = connect(mapStateToProps)(LoanInfo);
+
+export default reduxForm({ form: "loanForm" })(LoanInfo);
